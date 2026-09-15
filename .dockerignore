@@ -219,3 +219,17 @@ __marimo__/
 
 # VSCode
 .vscode/
+
+# Git
+.git/
+.github/
+.gitignore
+
+# Env
+.env.*
+
+# Markdown
+*.md
+
+# tests
+tests/
