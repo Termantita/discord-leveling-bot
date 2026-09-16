@@ -1,6 +1,6 @@
 import os
 
-from discord import Intents
+from discord import Intents, Object
 from discord.ext.commands import Bot as DiscordBot
 
 from config.config import Config
@@ -19,22 +19,31 @@ class Bot(DiscordBot):
 
         if intents is None:
             intents = Intents.default()
+            intents.message_content = True
+            intents.guilds = True
 
         self._config = config
 
         super().__init__(
             command_prefix="!",
-            intents=intents,
+            intents=intents,   
         )
 
     @property
     def config(self):
         return self._config
 
-    async def setup(self):
+    async def setup_hook(self):
         await self._load_cogs()
-
+        await self._sync_commands()
         print("Setup complete")
+
+    async def _sync_commands(self):
+        print("Syncing commands...")
+        discord_obj = Object(id=int(self.config.DISCORD_GUILD_ID))
+
+        self.tree.copy_global_to(guild=discord_obj)
+        await self.tree.sync(guild=discord_obj)
 
     async def _load_cogs(self, dir: str = "cogs"):
         """Load all cogs from the specified directory."""

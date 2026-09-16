@@ -5,7 +5,7 @@ from config.config import config
 
 
 async def main(bot: Bot):
-    await bot.setup()
+    await bot._async_setup_hook()
     await bot.start(bot.config.DISCORD_BOT_TOKEN)
 
 

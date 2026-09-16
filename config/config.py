@@ -20,7 +20,10 @@ class Config(BaseSettings):
         description="Discord token to connect the bot client",
     )
     DISCORD_GUILD_ID: str = Field(
-        description="Guild ID to sync slash commands",
+        description="Guild ID to sync app commands",
+    )
+    DISCORD_BOT_APPLICATION_ID: str = Field(
+        description="Bot application ID to sync app commands"
     )
 
 
