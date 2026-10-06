@@ -25,6 +25,10 @@ class Config(BaseSettings):
     DISCORD_BOT_APPLICATION_ID: str = Field(
         description="Bot application ID to sync app commands"
     )
+    DB_URL: str = Field(
+        description="URL for database connection",
+        default="sqlite+aiosqlite:///db.sqlite3",
+    )
 
 
 config = Config()
